@@ -1,0 +1,13 @@
+body {
+    position: relative;
+    min-height: 100vh;
+}
+
+.cell {
+    height: 30vh;
+}
+
+.disabled {
+    pointer-events: none;
+} 
+
