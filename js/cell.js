@@ -6,14 +6,18 @@ var found = 0;
 let cells = document.getElementsByClassName("cell");
 for (cell of cells) {
     cell.addEventListener("click", cellClick);
+    cell.classList.add("disabled");
 }
 
-function initCells() {
+// init the game
+function initGame() {
     let cells = document.getElementsByClassName("cell");
     for (cell of cells) {
+        cell.classList.add("bg-dark");
         cell.classList.remove("disabled");
     }
 }
+
 // Table to fill the id of cards
 var cellClick = [];
 
@@ -30,6 +34,9 @@ function cellClick() {
             if (cellColors[cellClick[0] - 1] === cellColors[cellClick[1] - 1]) {
                 found++;
                 cellClick = [];
+                if (found === cellColors.length/2) {
+                    endGame();
+                }
             } else {
                 setTimeout(function () {
                     // initialize again the className of the card
@@ -44,11 +51,16 @@ function cellClick() {
     }
 }
 
-// Buton start
+// Button start
 let start = document.getElementById("start");
 start.addEventListener('click', startGame);
 
 function startGame() {
     start.classList.add("disabled");
-    initCells();
+    initGame();
+}
+
+function endGame() {
+    start.classList.remove("disabled");
+    
 }
