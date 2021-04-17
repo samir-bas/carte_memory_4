@@ -1,6 +1,6 @@
 //var cellColors = ["bg-primary","bg-secondary","bg-success","bg-danger","bg-warning","bg-info","bg-info","bg-warning", "bg-danger", "bg-success","bg-secondary","bg-primary"];
 var cellColors = ["bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info",];
-var found = 0;
+var found;
 
 // fill the event click for all the cards
 let cells = document.getElementsByClassName("cell");
@@ -13,9 +13,10 @@ for (cell of cells) {
 function initGame() {
     let cells = document.getElementsByClassName("cell");
     for (cell of cells) {
-        cell.classList.add("bg-dark");
-        cell.classList.remove("disabled");
+        cell.classList.toggle("bg-dark");
+        cell.classList.toggle("disabled");
     }
+    found = 0;
 }
 
 // Table to fill the id of cards
