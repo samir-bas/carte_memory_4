@@ -1,5 +1,5 @@
 var cellColors = ["bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info"];
-var found;
+var found, moves;
 
 // fill the event click for all the cards
 let cells = document.getElementsByClassName("cell");
@@ -8,18 +8,6 @@ for (cell of cells) {
     cell.classList.add("disabled");
 }
 
-// Create a random color table
-function randomColor() {
-    let index = random(cellColors.length -1);
-    //alert(index);
-    let temp;
-    //alert((cellColors.length)/2);
-    for(let i=0; i < (cellColors.length)/2; i++) {
-        temp = cellColors[i];
-        cellColors[i] = cellColors[cellColors.length - i -1]  ;
-        cellColors[cellColors.length - i -1] = temp;
-    }
-}
 // init the game
 function initGame() {
     let cells = document.getElementsByClassName("cell");
@@ -28,7 +16,9 @@ function initGame() {
         cell.classList.toggle("disabled");
     }
     found = 0;
+    moves = 0;
     randomColor();
+    displayMoves()
 }
 
 // Table to fill the id of chosen cards
@@ -43,6 +33,8 @@ function cellClick() {
         this.className = "cell disabled " + cellColors[parseInt(this.id) - 1];
         cellChoose.push(this.id);
         if (cellChoose.length === 2) {
+            moves++;
+            displayMoves(moves);
             // if cards have same color
             if (cellColors[cellChoose[0] - 1] === cellColors[cellChoose[1] - 1]) {
                 found++;
@@ -80,4 +72,33 @@ function endGame() {
 // Return a Random number 
 function random(max) {
     return Math.floor(Math.random() * Math.floor(max));
+}
+
+// Create a random color table
+function randomColor () {
+    let hasard, temp
+    for(let position = cellColors.length-1; position >= 1; position--){
+		hasard = random(position+1);
+		temp = cellColors[position];
+		cellColors[position] = cellColors[hasard];
+		cellColors[hasard] = temp;
+	}
+}
+
+// Create a random color table
+// function randomColor2() {
+//     let index = random(cellColors.length -1);
+//     //alert(index);
+//     let temp;
+//     //alert((cellColors.length)/2);
+//     for(let i=0; i < (cellColors.length)/2; i++) {
+//         temp = cellColors[i];
+//         cellColors[i] = cellColors[cellColors.length - i -1]  ;
+//         cellColors[cellColors.length - i -1] = temp;
+//     }
+// }
+
+function displayMoves (moves) {
+    movesLbl = document.getElementById("moves");
+    movesLbl.innerText = `Coups : ${moves}`;
 }
