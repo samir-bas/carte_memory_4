@@ -18,7 +18,7 @@ function initGame() {
     found = 0;
     moves = 0;
     randomColor();
-    displayMoves()
+    displayMoves(moves)
 }
 
 // Table to fill the id of chosen cards
